@@ -13,12 +13,13 @@ require_once "controller_index.php"
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
+<link rel="stylesheet" href="style.css">
 
-<body>
+<body id="bg">
     <h1 class="text-center">Formulaire d'identité</h1>
     <div class="row justify-content-center">
 
-        <div class="col-6 shadow p-3 mb-5 w-50 bg-white rounded">
+        <div class="col-6 shadow p-3 mb-5 w-50 bg-white rounded opacity">
             <form novalidate class="d-flex flex-column align-content-center" action="index.php" method="post">
                 <label for="name">Votre nom</label>
                 <input type="text" name="name" id="name" placeholder="ex: Patrick" value="<?= isset($_POST["name"]) ? htmlspecialchars($_POST["name"])  : "" ?>" />
@@ -44,23 +45,15 @@ require_once "controller_index.php"
                 <label for="phoneNumber">Votre telephone</label>
                 <input type="text" name="phoneNumber" id="phoneNumber" placeholder="numéro de téléphone" required value="<?= isset($_POST["phoneNumber"]) ? htmlspecialchars($_POST["phoneNumber"])  : "" ?>" />
                 <p class="text-danger"><?= isset($errorMessages["phoneNumber"]) ? $errorMessages['phoneNumber'] : "" ?></p>
-               
-               
-               
                 <label for="study">Vos Diplomes</label>
                 <select name="study" id="study" required >
                     <option selected disabled>choisissez</option>
-                    <option value="sans">sans</option>
-                    <option value="bac">bac</option>
-                    <option value="bac+2">bac+2</option>
-                    <option value="bac+3">bac+3</option>
-                    <option value="supérieur">supérieur</option>
+                    <?php 
+                     foreach($studyArray as $key => $value){ ?>
+                        <option value="<?= $key ?>"<?= isset($_POST["study"]) && $_POST["study"] == $key ? "selected" : "" ?>><?= $value ?></option>
+                     <?php } ?>
                 </select>
                 <p class="text-danger"><?= isset($errorMessages["study"]) ? $errorMessages['study'] : "" ?></p>
-                
-
-
-
                 <label for="emploi">Votre numéro pole emploi</label>
                 <input type="number" name="emploi" id="emploi" placeholder="ex: 58518135" required value="<?= isset($_POST["emploi"]) ? htmlspecialchars($_POST["emploi"])  : "" ?>" />
                 <p class="text-danger"><?= isset($errorMessages["emploi"]) ? $errorMessages['emploi'] : "" ?></p>
@@ -71,10 +64,10 @@ require_once "controller_index.php"
                 <input type="url" name="cademy" id="cademy" required value="<?= isset($_POST["cademy"]) ? htmlspecialchars($_POST["cademy"])  : "" ?>" />
                 <p class="text-danger"><?= isset($errorMessages["cademy"]) ? $errorMessages['cademy'] : "" ?></p>
                 <label for="super">Votre super heros</label>
-                <textarea type="text" name="super" id="super" required value="<?= isset($_POST["super"]) ? htmlspecialchars($_POST["super"])  : "" ?>"></textarea>
+                <textarea type="text" name="super" id="super" required ><?= isset($_POST["super"]) ? htmlspecialchars($_POST["super"])  : "" ?></textarea>
                 <p class="text-danger"><?= isset($errorMessages["super"]) ? $errorMessages['super'] : "" ?></p>
                 <label for="hack">Votre lifeHack</label>
-                <textarea type="text" name="hack" id="hack" required value="<?= isset($_POST["hack"]) ? htmlspecialchars($_POST["hack"])  : "" ?>"></textarea>
+                <textarea type="text" name="hack" id="hack" required ><?= isset($_POST["hack"]) ? htmlspecialchars($_POST["hack"])  : "" ?></textarea>
                 <p class="text-danger"><?= isset($errorMessages["hack"]) ? $errorMessages['hack'] : "" ?></p>
                 <label for="xp">Votre experience en programation/informatique</label>
                 <textarea type="text" name="xp" id="xp" required><?= isset($_POST["xp"]) ? htmlspecialchars($_POST["xp"])  : "" ?></textarea>
@@ -85,6 +78,9 @@ require_once "controller_index.php"
                 </div>
             </form>
         </div>
+    </div>
+    <div>
+    
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
