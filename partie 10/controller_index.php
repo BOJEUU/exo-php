@@ -12,6 +12,7 @@ $studyArray = [
     5 => "bac+5",
     6 => "bac + bojeu"
 ];
+$showform = "true";
 if (isset($_POST["name"])) {
     if (!preg_match($regexName, $_POST["name"])) {
         $errorMessages["name"] = "veuillez saisir un nom valide";
@@ -138,4 +139,23 @@ if (isset($_POST["xp"])) {
     if (empty($_POST["xp"])) {
         $errorMessages["xp"] = "veuillez saisir votre texte";
     }
+}
+
+if(isset($_POST["submit"]) && count($errorMessages) == 0 ){
+    $name = htmlspecialchars($_POST["name"]);
+    $firstname = htmlspecialchars($_POST["firstname"]);
+    $birth = htmlspecialchars($_POST["birth"]);
+    $country = htmlspecialchars($_POST["country"]);
+    $address = htmlspecialchars($_POST["address"]);
+    $nationality = htmlspecialchars($_POST["nationality"]);
+    $mail = htmlspecialchars($_POST["mail"]);
+    $phoneNumber = htmlspecialchars($_POST["phoneNumber"]);
+    $study = htmlspecialchars($_POST["study"]);
+    $emploi = htmlspecialchars ($_POST["emploi"]);
+    $badge = htmlspecialchars($_POST["badge"]);
+    $cademy = htmlspecialchars($_POST["cademy"]);
+    $super = htmlspecialchars($_POST["super"]);
+    $hack = htmlspecialchars($_POST["hack"]);
+    $xp = htmlspecialchars($_POST["xp"]);
+    $showform = false;
 }
